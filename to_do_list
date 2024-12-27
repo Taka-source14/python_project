@@ -1,0 +1,50 @@
+import tkinter as tk
+
+def gorev_ekle():
+    yeni_gorev = gorev_giris.get()
+    if yeni_gorev:
+        gorevler.append({"gorev": yeni_gorev, "yapıldı": False})
+        gorev_listesi.insert(tk.END, yeni_gorev)
+        gorev_giris.delete(0, tk.END)
+def gorev_sil ():
+    secili_indeks = gorev_listesi.curselection()
+    if secili_indeks:
+        gorevler.pop(secili_indeks[0])
+        gorev_listesi.delete(secili_indeks)
+def gorev_yapildi():
+    secili_indeks = gorev_listesi.curselection()
+    if secili_indeks:
+        gorevler[secili_indeks[0]]["yapıldı"] = True
+        yeni_metin = gorevler[secili_indeks[0]]["gorev"] + " (YAPILDI) "
+        gorev_listesi.delete(secili_indeks[0])
+        gorev_listesi.insert(secili_indeks[0], yeni_metin)
+        gorev_listesi.itemconfig(secili_indeks[0], fg = "green")
+        
+gorevler = []
+
+#ana pencereyi tasarlıyalım
+ana_pencere = tk.Tk()
+ana_pencere.title("Görev Listesi")
+
+#ana pencerede kullanıcıdan görev alma inputu
+gorev_giris = tk.Entry(ana_pencere, width = 40)
+gorev_giris.pack(pady = 5)
+
+#görev ekleme butonu
+ekle_buton = tk.Button(ana_pencere, text = "Görev Ekle", command=gorev_ekle)
+ekle_buton.pack(pady = 5)
+
+#görev listesi alanını oluşturuyoruz
+gorev_listesi= tk.Listbox(ana_pencere, width = 50, height = 15)
+gorev_listesi.pack(pady = 10)
+
+#seçilen görevi silme butonu oluşturuyoruz
+sil_buton = tk.Button(ana_pencere, text = "Seçilen Görevi Sil", command = gorev_sil)
+sil_buton.pack(pady = 5)
+
+#İşaretleme Butonunu Oluşturuyoruz
+yapildi_buton = tk.Button(ana_pencere, text = "Yapıldı Olarak İşaretle", command = gorev_yapildi)
+yapildi_buton.pack(pady = 5)
+
+#ana döngüyü başlat
+ana_pencere.mainloop()
