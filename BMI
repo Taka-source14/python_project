@@ -1,0 +1,24 @@
+
+adiniz = input("İsminiz Nedir: ")
+
+soy_adiniz = input("Soy İsminiz Nedir: ")
+
+kilo = int(input("Kilonuz Nedir: "))
+
+boy = float(input("Boyunuz Nedir: "))
+
+kütle_endeks_hesap = kilo / boy**2
+
+
+if 0 <= kütle_endeks_hesap <= 18:
+    print("Kilo Alman Lazım")
+
+elif 18 < kütle_endeks_hesap <= 24:
+    print("Normalsin Hadi Yine iyisin Biladerim")
+
+elif 24 < kütle_endeks_hesap <= 29:
+    print("Kilolusun Kardeş")
+
+else:
+    print("Kilo Vermen Lazım Ölüyorsun")
+
